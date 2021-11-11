@@ -9,6 +9,7 @@ from rest_framework import mixins
 from rest_framework.generics import GenericAPIView, CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class ReviewCreate(CreateAPIView):
@@ -21,6 +22,7 @@ class ReviewCreate(CreateAPIView):
 
 
 class ReviewList(ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     # queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
@@ -30,6 +32,7 @@ class ReviewList(ListAPIView):
 
 
 class ReviewDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
